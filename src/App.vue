@@ -1,18 +1,60 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Timer v-bind:rendertime="renderTime"/>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Timer from './components/Timer.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Timer
+  },
+  data(){
+    return {
+      startingMinutes: 25,
+      time: 0,
+      renderTime: ""
+
+    }
+  },
+
+ mounted() {
+   this.countDownTimer();
+ },
+
+
+
+  methods: {
+    
+    countDownTimer(){
+      setInterval(this.updateCountdown, 1000);
+    },
+
+    updateCountdown(){
+      this.time = this.startingMinutes * 60;
+      console.log("ok", this.time)
+      const minutes = Math.floor(this.time / 60);
+      console.log("HERE", minutes)
+      let seconds = this.time % 60;
+      console.log("here too!", seconds)
+      this.renderTime = `${minutes}: ${seconds}`; 
+      this.time--;
+    }
   }
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
 
 <style>
 #app {
