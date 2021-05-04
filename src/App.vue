@@ -1,60 +1,55 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <Timer v-bind:rendertime="renderTime"/>
+  {{timeDisplay}}
 </template>
 <script>
-import Timer from './components/Timer.vue'
+
 
 export default {
   name: 'App',
-  components: {
-    Timer
-  },
-  data(){
-    return {
-      startingMinutes: 25,
-      time: 0,
-      renderTime: ""
 
+  data: ()=> {
+    const focusDuration = 25;
+    return {
+      currentFocusTimeInSeconds: focusDuration * 60,
+    };
+  },
+ 
+
+  computed: {
+    timeDisplay() {
+      const minutes = parseInt(this.currentFocusTimeInSeconds / 60);
+      const seconds = this.currentFocusTimeInSeconds % 60;
+
+      const paddedMinutes = ("0" + minutes).slice(-2);
+      const paddedSeconds = ("0" + seconds).slice(-2);
+
+      return `${paddedMinutes}:${paddedSeconds}`;
     }
   },
 
- mounted() {
-   this.countDownTimer();
- },
-
-
+  mounted(){
+    setInterval(this.countDownTimer, 1000)
+  },
 
   methods: {
-    
-    countDownTimer(){
-      setInterval(this.updateCountdown, 1000);
+    countDownTimer() {
+      if(this.currentFocusTimeInSeconds > 0){
+        console.log(this.currentFocusTimeInSeconds)
+          this.currentFocusTimeInSeconds--;
+      } else if (this.currentFocusTimeInSeconds === 0){
+        console.log("break time")
+        return;
+      }
+        
+    }
+
+
     },
 
-    updateCountdown(){
-      this.time = this.startingMinutes * 60;
-      console.log("ok", this.time)
-      const minutes = Math.floor(this.time / 60);
-      console.log("HERE", minutes)
-      let seconds = this.time % 60;
-      console.log("here too!", seconds)
-      this.renderTime = `${minutes}: ${seconds}`; 
-      this.time--;
-    }
+   
   }
-}
+
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
 <style>
 #app {
