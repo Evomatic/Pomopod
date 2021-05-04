@@ -1,16 +1,25 @@
 <template>
   {{timeDisplay}}
+  <Buttons
+    v-on:start="buttonState = true"
+    v-on:stop="buttonState = false"
+    
+  />
 </template>
 <script>
 
+import Buttons from '@/components/Buttons.vue'
 
 export default {
   name: 'App',
-
+  components:{
+    Buttons
+  },
   data: ()=> {
     const focusDuration = 25;
     return {
       currentFocusTimeInSeconds: focusDuration * 60,
+      buttonState: false
     };
   },
  
@@ -33,7 +42,7 @@ export default {
 
   methods: {
     countDownTimer() {
-      if(this.currentFocusTimeInSeconds > 0){
+      if(this.currentFocusTimeInSeconds > 0 && this.buttonState === true){
         console.log(this.currentFocusTimeInSeconds)
           this.currentFocusTimeInSeconds--;
       } else if (this.currentFocusTimeInSeconds === 0){
@@ -41,9 +50,9 @@ export default {
         return;
       }
         
-    }
+    },
 
-
+  
     },
 
    
