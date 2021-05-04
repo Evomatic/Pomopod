@@ -11,28 +11,45 @@
 <script>
 export default {
     name: 'Buttons',
-    props: ['startButtonState'],
+    props: [
+    'startButtonState',
+    'buttonstate'],
+    emits: [
+    'start', 
+    'stop', 
+    'click', 
+    'startTime', 
+    'stopTimer',
+    'buttonStateStart',
+    'buttonStateStop'],
+
     data: () => ({
-        
     }),
-
-    computed: {
-    
-    },
-    
-
     methods: {
 
     startButton() {
-        console.log("CLICK!")
+        if(this.buttonstate) {
+    console.log("START")
       this.$emit('start')
-
+      this.$emit('startTime')
+      this.$emit('buttonStateStart')
+      
+        }
     },
     stopButton() {
-        console.log("CLICK!")
+        if(!this.buttonstate) {
+      console.log("STOP")
       this.$emit('stop')
-
+      this.$emit('stopTimer')
+      this.$emit('buttonStateStop')
+     
+        }
     },
+
+    resetButton(){
+
+    }
+
     }
 };
 </script>
