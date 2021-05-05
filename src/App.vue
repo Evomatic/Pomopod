@@ -4,13 +4,12 @@
     <h1 class="pomopod">Pomopod</h1>
     <img class="pic" src="./assets/seedling_1f331.png" alt="seedling"/>
   </div>
-  <div class="timer">{{focusTimeDisplay}}</div> 
-  <div class="startbtn"> 
-        <button v-on:click="startButton" type="button">Start</button> 
+  <div class="timer" v-if="focusOrBreakView">{{focusTimeDisplay}}</div> 
+   <div class="timer" v-if="!focusOrBreakView">{{breakTimeDisplay}}</div> 
+  <div class="btns"> 
+        <button class='startbtn' v-on:click="startButton" type="button">Start</button> 
+        <button class='stop' v-on:click="stopButton" type="button">Stop</button>
     </div>   
-    <div class="stopbtn">
-        <button v-on:click="stopButton" type="button">Stop</button> 
-    </div>
 </div>
   <!-- <Buttons
     v-on:start="this.buttonText = 'start'"
@@ -21,14 +20,14 @@
     v-on:buttonStateStop="this.buttonState = true;"
     v-bind:buttonstate="buttonState"
   /> -->
-  <Focus
+  <!-- <Focus
     v-if="focusOrBreakView"
     v-bind:focustimedisplay="focusTimeDisplay"
   />
   <Break
   v-if="!focusOrBreakView"
     v-bind:breaktimedisplay="breakTimeDisplay"
-  />
+  /> -->
 
 
 
@@ -36,18 +35,18 @@
 <script>
 
 //import Buttons from '@/components/Buttons.vue'
-import Focus from '@/components/Focus.vue'
-import Break from '@/components/Break.vue'
+// import Focus from '@/components/Focus.vue'
+// import Break from '@/components/Break.vue'
 
 export default {
   name: 'App',
   components:{
     //Buttons,
-    Focus,
-    Break
+    //Focus,
+    //Break
   },
   data: function() {
-    const focusDuration = 25 * 60;
+    const focusDuration = .2 * 60;
     const breakDuration = 0.1 * 60;
     return {
       focusDuration: focusDuration,
@@ -57,7 +56,8 @@ export default {
       buttonText:"" ,
       focusOrBreakView: true,
       timeInterval: null,
-      buttonState: true
+      buttonState: true,
+      timeDisplay: null
     };
   },
  
@@ -117,47 +117,17 @@ export default {
   
     },
 
-
-
-    // focusCountDownTimer() {
-    //   console.log(this.buttonText)
-    //   if(this.currentFocusTimeInSeconds > 0 && this.buttonText === "start" && this.focusOrBreakView === true){
-    //        this.timeInterval = setInterval(()=>{
-    //        this.currentFocusTimeInSeconds--
-    //        if(this.currentFocusTimeInSeconds === 0){
-    //          clearInterval(this.timeInterval)
-    //          this.changeView();
-    //        }
-    //     }, 1000);
-        
-    //   } else if (this.currentFocusTimeInSeconds === 0){
-    //     this.changeView();
-    //   }
-    // },
-
-  //  breakCountDownTimer() {
-  //    console.log("BREAK")
-  //     if(this.currentBreakTimeInSeconds > 0 && this.buttonText === "start" && this.focusOrBreakView === false){
-  //       this.timeInterval = setInterval(()=>{
-  //          this.currentBreakTimeInSeconds--
-  //       }, 1000);
-  //     } else if (this.currentBreakTimeInSeconds === 0){
-  //       this.changeView();
-      
-  //     }
-        
-  //   }, 
-
     changeView(){
       if (this.currentFocusTimeInSeconds === -1){
+         this.stopTimer();
         this.currentBreakTimeInSeconds = this.breakDuration;
         this.focusOrBreakView = false;
         this.buttonState = true;
-        this.stopTimer();
+       
       }
       if (this.currentBreakTimeInSeconds === -1){
-        this.currentFocusTimeInSeconds = this.focusDuration;
         this.stopTimer();
+        this.currentFocusTimeInSeconds = this.focusDuration;
         this.focusOrBreakView = true;
         this.buttonState = true;
         console.log("AFTER CHANGEVIEW")
@@ -204,15 +174,15 @@ export default {
 }
 
 .pic{
-  margin-top: 11px;
+  margin-top: 13px;
   margin-left: 10px;
-  width: 30px;
-  height: 30px;
+  width: 100px;
+  height: 100px;
  
 }
 
 .container{
-  min-height: 100vh;
+  height: 100vh;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -226,14 +196,26 @@ export default {
   flex-direction: row;
 }
 .pomopod{
-  font-size: 35px;
+  font-size: 100px;
 }
 .timer{
   position:relative;
   margin-top:100px;
-  width:195px;
+  width: 415px;
+  font-size: 110px;
+}
+.btns {
+  margin-top: 50px;
   font-size: 50px;
 }
+
+.startbtn {
+ margin-right: 300px;
+}
+.stop {
+width: 200px;
+}
+
 
 
 </style>
