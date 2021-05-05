@@ -1,6 +1,6 @@
-<template lang="">
-    <div>
-     {{focustimedisplay}}   
+<template>
+    <div class="container">
+        
     </div>
 </template>
 <script>
@@ -9,6 +9,9 @@ export default {
     props: ['focustimedisplay']
 }
 </script>
-<style lang="">
-    
+
+<style>
+
+
+  
 </style>
