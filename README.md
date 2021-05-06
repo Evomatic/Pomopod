@@ -21,6 +21,8 @@ Follow these instructions to get the project locally running on your machine for
 
 ```
 npm install
+
+npm run build
 ```
 
 ## Choose one option below
