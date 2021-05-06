@@ -1,4 +1,4 @@
-"This was created during my time as a student at Code Chrysalis."
+This was created during my time as a student at Code Chrysalis.
 
 # Pomopod - an app based on the pomodoro study technique, that helps to keep you focus while you study
 
@@ -7,34 +7,34 @@
 
 ## Built with
 
-*[Vuex](https://vuejs.org) for the UI
-*[Express](http://expressjs.com/) for light server
+* [Vuex](https://vuejs.org) for the UI
+* [Express](http://expressjs.com/) for light server
 
 
 
 
-##Getting Started
+## Getting Started
 
 Follow these instructions to get the project locally running on your machine for development and testing purposes.
 
-##installing
+## installing
 
 ```
 npm install
 ```
 
-##Choose one option below
+## Choose one option below
 
-##command for starting the server and viewing on port:8080
+## command for starting the server and viewing on port:8080
 
-`````
+```
 npm run start
 ```
 
 
 ## for starting the vue cli and viewing on port: 8080
 
-````
+```
 npm run serve
 ```
 
